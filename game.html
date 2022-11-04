@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Wanjirou's Yakuman Blocks</title>
+    <style>
+    	* { padding: 0; margin: 0;}
+    	canvas { 
+			background: #eee; 
+			display: block;
+			margin: 0 auto;
+			image-rendering: optimizeSpeed;
+			image-rendering: -moz-crisp-edges;
+			image-rendering: -webkit-optimize-contrast;
+			image-rendering: optimize-contrast;
+			image-rendering: pixelated;
+			font-smooth: never;
+			-webkit-font-smoothing : none;
+			-ms-interpolation-mode: nearest-neighbor;
+			width: 600px;
+			height: 600px;
+		}
+		
+	}
+    </style>
+	
+</head>
+<body leftMargin="0" topMargin="0">
+
+
+<canvas id="myCanvas" width="300" height="300"></canvas>
+
+
+<div style="display:none;">
+	<img id="imgSrc1Man"
+		src="images/tile_m1.png"
+		width="16" height="20">
+	<img id="imgSrc2Man"
+		src="images/tile_m2.png"
+		width="16" height="20">
+	<img id="imgSrc3Man"
+		src="images/tile_m3.png"
+		width="16" height="20">
+	<img id="imgSrc4Man"
+		src="images/tile_m4.png"
+		width="16" height="20">
+	<img id="imgSrc5Man"
+		src="images/tile_m5.png"
+		width="16" height="20">
+	<img id="imgSrc6Man"
+		src="images/tile_m6.png"
+		width="16" height="20">
+	<img id="imgSrc7Man"
+		src="images/tile_m7.png"
+		width="16" height="20">
+	<img id="imgSrc8Man"
+		src="images/tile_m8.png"
+		width="16" height="20">
+	<img id="imgSrc9Man"
+		src="images/tile_m9.png"
+		width="16" height="20">
+	<img id="imgSrc1Pin"
+		src="images/tile_p1.png"
+		width="16" height="20">
+	<img id="imgSrc2Pin"
+		src="images/tile_p2.png"
+		width="16" height="20">
+	<img id="imgSrc3Pin"
+		src="images/tile_p3.png"
+		width="16" height="20">
+	<img id="imgSrc4Pin"
+		src="images/tile_p4.png"
+		width="16" height="20">
+	<img id="imgSrc5Pin"
+		src="images/tile_p5.png"
+		width="16" height="20">
+	<img id="imgSrc6Pin"
+		src="images/tile_p6.png"
+		width="16" height="20">
+	<img id="imgSrc7Pin"
+		src="images/tile_p7.png"
+		width="16" height="20">
+	<img id="imgSrc8Pin"
+		src="images/tile_p8.png"
+		width="16" height="20">
+	<img id="imgSrc9Pin"
+		src="images/tile_p9.png"
+		width="16" height="20">
+	<img id="imgSrc1Sou"
+		src="images/tile_s1.png"
+		width="16" height="20">
+	<img id="imgSrc2Sou"
+		src="images/tile_s2.png"
+		width="16" height="20">
+	<img id="imgSrc3Sou"
+		src="images/tile_s3.png"
+		width="16" height="20">
+	<img id="imgSrc4Sou"
+		src="images/tile_s4.png"
+		width="16" height="20">
+	<img id="imgSrc5Sou"
+		src="images/tile_s5.png"
+		width="16" height="20">
+	<img id="imgSrc6Sou"
+		src="images/tile_s6.png"
+		width="16" height="20">
+	<img id="imgSrc7Sou"
+		src="images/tile_s7.png"
+		width="16" height="20">
+	<img id="imgSrc8Sou"
+		src="images/tile_s8.png"
+		width="16" height="20">
+	<img id="imgSrc9Sou"
+		src="images/tile_s9.png"
+		width="16" height="20">
+	<img id="imgSrcTon"
+		src="images/tile_ton.png"
+		width="16" height="20">
+	<img id="imgSrcNan"
+		src="images/tile_nan.png"
+		width="16" height="20">
+	<img id="imgSrcSha"
+		src="images/tile_sha.png"
+		width="16" height="20">
+	<img id="imgSrcPei"
+		src="images/tile_pei.png"
+		width="16" height="20">
+	<img id="imgSrcChun"
+		src="images/tile_chun.png"
+		width="16" height="20">
+	<img id="imgSrcHaku"
+		src="images/tile_haku.png"
+		width="16" height="20">
+	<img id="imgSrcHatsu"
+		src="images/tile_hatsu.png"
+		width="16" height="20">
+	<img id="imgSrcFlash"
+		src="images/tile_flash.png"
+		width="16" height="20">
+	<img id="imgSrcBomb"
+		src="images/bomb.png"
+		width="16" height="20">
+	<img id="imgSrcBombFlash"
+		src="images/bomb_flash.png"
+		width="16" height="20">
+	<img id="imgUI"
+		src="images/ui.png"
+		width="300" height="300">
+	<img id="imgBubble"
+		src="images/bubble.png"
+		width="300" height="300">
+	<img id="imgWanjiDefault"
+		src="images/wanji_default.png"
+		width="300" height="300">
+	<img id="imgWanjiGood"
+		src="images/wanji_good.png"
+		width="300" height="300">
+	<img id="imgWanjiGreat"
+		src="images/wanji_great.png"
+		width="300" height="300">
+	<img id="imgWanjiNotAmused"
+		src="images/wanji_not_amused.png"
+		width="300" height="300">
+	<img id="imgWanjiGameOver"
+		src="images/wanji_game_over.png"
+		width="300" height="300">
+</div>
+
+
+
+
+<script>
+	
+	window.addEventListener("keydown", function(e) {
+ // space and arrow keys
+
+}, false);
+
+	const Input = {
+	  Up: false,
+	  Down: false,
+	  Left: false,
+	  Right: false,
+	  Z: false,
+	  T: false,
+	}
+
+	// Input
+	window.addEventListener('keydown', function (event) {
+		switch (event.keyCode) {
+		  case 37:
+			Input.Left = true
+			break;
+		  case 39:
+			Input.Right = true
+			break;
+		  case 40:
+			Input.Down = true
+			break;
+		  case 38:
+			Input.Up = true
+			break;
+		  case 38:
+			Input.Up = true
+			break;
+		  case 90:
+			Input.Z = true
+			break;
+		  case 84:
+			Input.T = true
+			break;
+		  default:
+			break;
+	   }
+	    if([32, 37, 38, 39, 40].indexOf(event.keyCode) > -1) {
+		event.preventDefault();
+ }
+	});
+	
+	window.addEventListener('keyup', function (event) {
+		switch (event.keyCode) {
+		  case 37:
+			Input.Left = false
+			break;
+		  case 39:
+			Input.Right = false
+			break;
+		  case 40:
+			Input.Down = false
+			break;
+		  case 38:
+			Input.Up = false
+			break;
+		  case 38:
+			Input.Up = false
+			break;
+		  case 90:
+			Input.Z = false
+			break;
+		  default:
+			break;
+	   }
+	});
+
+	const canvas = document.getElementById("myCanvas")
+	const ctx = canvas.getContext("2d")
+	
+	var f = new FontFace('PressStart2P', 'url(fonts/PressStart2P.ttf)')
+	f.load().then(function(font) {
+	  document.fonts.add(font)
+	  ctx.font = '8px PressStart2P'
+	})
+	
+	var f2 = new FontFace('retro_computer', 'url(fonts/retro_computer.ttf)')
+	f2.load().then(function(font) {
+	  document.fonts.add(font)
+	})
+	
+	// Load sounds
+	var sfxTileLand = new sound("sfx/tileLand.wav")
+	var sfxTileLock = new sound("sfx/tileLock.wav")
+	var sfxYaku = new sound("sfx/yaku.wav")
+	var sfxScore = new sound("sfx/score.wav")
+	var sfxYakuman = new sound("sfx/yakuman.wav")
+	var sfxNewGame = new sound("sfx/newGame.wav")
+	var sfxGameOver = new sound("sfx/gameOver.wav")
+	var sfxBomb = new sound("sfx/bomb.wav");
+	
+	// Game design variables
+	const boardWidth = 9
+	const boardHeight = 15
+	const tileListSize = boardWidth * boardHeight
+	const tileLockFrames = 30
+	const minFallSpeed = 0.01
+	const maxFallSpeed = 0.2
+	const secondsToMaxFallSpeed = 1200
+	const tilesToBomb = 80
+	
+	
+	// Visual design variables
+	var boardX = 30
+	var boardY = canvas.height - 50
+	
+	// Game variables
+	var timeLast = 0
+	var gameOver = true
+	var score = 0
+	var scoreHigh = 0
+	var activeSlot = -1 // Which is the currently controlled falling piece tile (the pivot one)
+	var nextTile = 0
+	var framesOnGround = 0 // Used to delay the piece locking in when it touches something
+	var framesHeldLeft = 0
+	var framesHeldRight = 0
+	var spawnNewPieceDelay = 0 // Small delay that counts up after a piece is locked
+	var frameCounter = 0 // Ticks up 1 per frame, at 60 it resets to zero and adds to secondCounter
+	var secondCounter = 0
+	var shouldCheckMatches = false
+	var roundWind = 27 // is always east
+	var seatWind = 28  // Set randomly to south, west, or north in newGame()
+	var pinfuTile = -1 // tile ID of the just-placed tile, used to check for pinfu
+	var flashPosition = -1 // Marks a tile to flash for one frame, used when a piece locks in
+	var tilesSpawned = 0
+	var lastPlacedSlot = -1
+	var trainingWheels = false
+	var wanjiImage = 39
+	var wanjiText = ""
+	var wanjiDuration = 0
+	
+	var msgGood = ["Nice!", "Cool!", "Tasty!", "Not bad!"]
+	var msgGreat = ["Itadaki!", "Fantastic!", "Delicious!", "Incredible!"]
+
+	// Class for each functional space on the game grid
+	class Tile {
+		constructor() {
+			this.yOffset = 0
+			this.tileID = -1
+			this.matchedDelay = 0
+		}
+	}
+	
+	class Text {
+		constructor(_x, _y, _text, _timer, _scoreTier) {
+			this.x = _x
+			this.y = _y
+			this.text = _text
+			this.timer = _timer
+			this.scoreTier = _scoreTier
+		}
+	}
+	
+	var texts = []
+
+	// Prepare all the graphics
+	var tileImages = []
+	tileImages[0] = document.getElementById('imgSrc1Man')
+	tileImages[1] = document.getElementById('imgSrc2Man')
+	tileImages[2] = document.getElementById('imgSrc3Man')
+	tileImages[3] = document.getElementById('imgSrc4Man')
+	tileImages[4] = document.getElementById('imgSrc5Man')
+	tileImages[5] = document.getElementById('imgSrc6Man')
+	tileImages[6] = document.getElementById('imgSrc7Man')
+	tileImages[7] = document.getElementById('imgSrc8Man')
+	tileImages[8] = document.getElementById('imgSrc9Man')
+	tileImages[9] = document.getElementById('imgSrc1Pin')
+	tileImages[10] = document.getElementById('imgSrc2Pin')
+	tileImages[11] = document.getElementById('imgSrc3Pin')
+	tileImages[12] = document.getElementById('imgSrc4Pin')
+	tileImages[13] = document.getElementById('imgSrc5Pin')
+	tileImages[14] = document.getElementById('imgSrc6Pin')
+	tileImages[15] = document.getElementById('imgSrc7Pin')
+	tileImages[16] = document.getElementById('imgSrc8Pin')
+	tileImages[17] = document.getElementById('imgSrc9Pin')
+	tileImages[18] = document.getElementById('imgSrc1Sou')
+	tileImages[19] = document.getElementById('imgSrc2Sou') 
+	tileImages[20] = document.getElementById('imgSrc3Sou')
+	tileImages[21] = document.getElementById('imgSrc4Sou')
+	tileImages[22] = document.getElementById('imgSrc5Sou')
+	tileImages[23] = document.getElementById('imgSrc6Sou')
+	tileImages[24] = document.getElementById('imgSrc7Sou')
+	tileImages[25] = document.getElementById('imgSrc8Sou')
+	tileImages[26] = document.getElementById('imgSrc9Sou')
+	tileImages[27] = document.getElementById('imgSrcTon')
+	tileImages[28] = document.getElementById('imgSrcNan')
+	tileImages[29] = document.getElementById('imgSrcSha')
+	tileImages[30] = document.getElementById('imgSrcPei')
+	tileImages[31] = document.getElementById('imgSrcChun')
+	tileImages[32] = document.getElementById('imgSrcHaku')
+	tileImages[33] = document.getElementById('imgSrcHatsu')
+	tileImages[34] = document.getElementById('imgSrcFlash')
+	tileImages[35] = document.getElementById('imgSrcBomb')
+	tileImages[36] = document.getElementById('imgSrcBombFlash')
+	tileImages[37] = document.getElementById('imgUI')
+	tileImages[38] = document.getElementById('imgBubble')
+	tileImages[39] = document.getElementById('imgWanjiDefault')
+	tileImages[40] = document.getElementById('imgWanjiGood')
+	tileImages[41] = document.getElementById('imgWanjiGreat')
+	tileImages[42] = document.getElementById('imgWanjiNotAmused')
+	tileImages[43] = document.getElementById('imgWanjiGameOver')
+
+	// Create the tile grid in a list
+	var tileGrid = []
+	for (let i = 0; i < tileListSize; i++) {
+		tileGrid[i] = new Tile()
+	}
+	
+	
+	function update() {
+		
+		frameCounter++
+		if (frameCounter == 60) {
+			frameCounter = 0
+			secondCounter++
+		}
+	
+		if (gameOver) { 
+			if (Input.Z) {
+				gameOver = false
+				wanjiDuration = 100
+				wanjiText = "Let's go!"
+				wanjiImage = 40
+				newGame()
+			}
+		}
+		else {
+			if (activeSlot != -1) { // If we're in the "a piece is falling" phase
+			
+				var fallSpeedRatio = secondCounter / secondsToMaxFallSpeed
+				if (fallSpeedRatio > 1) {
+					fallSpeedRatio = 1
+				}
+				var fallSpeed = minFallSpeed + (maxFallSpeed - minFallSpeed) * fallSpeedRatio
+				
+				if (Input.Down) {
+					fallSpeed = 1.0
+				}
+				
+				// Handle left/right inputs
+				if (Input.Left && !Input.Right) {
+					framesHeldLeft++
+					if (framesHeldLeft == 1 || framesHeldLeft > 10) {
+						if (isSlotFree(activeSlot, 3)) {
+							tileGrid[activeSlot - 1].tileID = tileGrid[activeSlot].tileID
+							tileGrid[activeSlot - 1].yOffset = tileGrid[activeSlot].yOffset
+							tileGrid[activeSlot].tileID = -1
+							tileGrid[activeSlot].yOffset = 0.0
+							activeSlot -= 1
+						}
+					}
+				}
+				else {
+					framesHeldLeft = 0
+				}
+				
+				if (Input.Right && !Input.Left) {
+					framesHeldRight++
+					if (framesHeldRight == 1 || framesHeldRight > 10) {
+						if (isSlotFree(activeSlot, 1)) {
+							tileGrid[activeSlot + 1].tileID = tileGrid[activeSlot].tileID
+							tileGrid[activeSlot + 1].yOffset = tileGrid[activeSlot].yOffset
+							tileGrid[activeSlot].tileID = -1
+							tileGrid[activeSlot].yOffset = 0.0
+							activeSlot += 1
+						}
+					}
+				}
+				else {
+					framesHeldRight = 0
+				}
+			
+				// Move tile down
+				tileGrid[activeSlot].yOffset -= fallSpeed
+				
+				// When the active piece hit the bottom of its slot
+				if (tileGrid[activeSlot].yOffset <= 0) {
+					tileGrid[activeSlot].yOffset = 0
+					
+					
+					
+					// If there's space to fall underneath
+					if (isSlotFree(activeSlot, 2)) {
+						framesOnGround = 0
+						tileGrid[activeSlot - boardWidth].tileID = tileGrid[activeSlot].tileID
+						tileGrid[activeSlot].tileID = -1
+						activeSlot -= boardWidth
+						tileGrid[activeSlot].yOffset = 1.0
+					}
+					else { // On ground
+						if (!Input.Down && framesOnGround == 0) {
+							sfxTileLand.play()
+						}
+						framesOnGround++
+						
+						if (framesOnGround >= tileLockFrames || Input.Down) {
+							framesOnGround = 0
+							pinfuTile = tileGrid[activeSlot].tileID
+							flashPosition = activeSlot
+							lastPlacedSlot = activeSlot
+							activeSlot = -1 // Mark exit of "piece is falling" phase
+							shouldCheckMatches = true
+							sfxTileLock.play()
+						}
+					}
+					
+				}
+			}
+			else {
+				
+				// Try to move down all the pieces if possible
+				var piecesSettled = true
+				for (let i=0; i<tileListSize; i++) {
+					if (tileGrid[i].tileID != -1 && tileGrid[i].matchedDelay == 0) { // If there's a tile in this slot
+					
+						if (tileGrid[i].yOffset > 0) {
+							piecesSettled = false
+							tileGrid[i].yOffset -= 0.1
+							if (tileGrid[i].yOffset <= 0) {
+							
+								if (isSlotFree(i, 2)) {
+									movePieceDown(i)
+								}
+								else {
+									tileGrid[i].yOffset = 0
+									shouldCheckMatches = true
+								}
+							
+							}
+						}
+						else {
+							if (isSlotFree(i, 2)) {
+								piecesSettled = false
+								movePieceDown(i)
+							}
+						}
+					}
+				}
+				
+				// Check for active flashing matches
+				var matchesActive = false
+				for (let i=0; i<tileListSize; i++) {
+					if (tileGrid[i].matchedDelay > 0) {
+						matchesActive = true
+						tileGrid[i].matchedDelay--
+						if (tileGrid[i].matchedDelay == 0) {
+							if (tileGrid[i].tileID == 35) {
+								sfxBomb.play()
+							}
+							tileGrid[i].tileID = -1 // clear the tile
+						}
+					}
+				}
+				
+				if (piecesSettled) {
+					
+					// check matches
+					if (shouldCheckMatches && !matchesActive) {
+						if (pinfuTile == 35) { // If a bomb was just placed
+							// If bomb wasn't placed on the floor
+							if (lastPlacedSlot > boardWidth) {
+								var suitToClear = checkSuit(tileGrid[lastPlacedSlot - boardWidth].tileID)
+								for (let i=0; i<tileListSize; i++) {
+									if (checkSuit(tileGrid[i].tileID) == suitToClear) {
+										tileGrid[i].matchedDelay = 60
+									}
+								}
+							}
+						
+							tileGrid[lastPlacedSlot].matchedDelay = 60
+							pinfuTile = -1
+							
+							
+							
+							
+						}
+						else {
+						
+							// horizontal matches
+							for (let y=0; y<boardHeight; y++) {
+								for (let x=0; x<boardWidth - 4; x++) {
+									var start = y*boardWidth + x
+									var match = [start, start+1, start+2, start+3, start+4]
+									checkMatch(match)
+								}
+							}
+							
+							// Vertical matches
+							for (let x=0; x<boardWidth; x++) {
+								for (let y=0; y<boardHeight - 4; y++) {
+									var start = y*boardWidth + x
+									var match = [start, start+boardWidth, start+boardWidth*2, start+boardWidth*3, start+boardWidth*4]
+									checkMatch(match)
+								}
+							}
+							
+							
+							// diagonal matches
+							for (let y=0; y<boardHeight-4; y++) {
+								for (let x=0; x<boardWidth - 4; x++) {
+									var start = y*boardWidth + x
+									var match = [start, start+1+boardWidth, start+2+boardWidth*2, start+3+boardWidth*3, start+4+boardWidth*4]
+									checkMatch(match)
+								}
+							}
+							
+							// diagonal matches
+							for (let y=0; y<boardHeight-4; y++) {
+								for (let x=4; x<boardWidth; x++) {
+									var start = y*boardWidth + x
+									var match = [start, start-1+boardWidth, start-2+boardWidth*2, start-3+boardWidth*3, start-4+boardWidth*4]
+									checkMatch(match)
+								}
+							}
+							
+						}
+						shouldCheckMatches = false
+						pinfuTile = -1
+					}
+					
+					if (!matchesActive) { // if no matches:
+						spawnNewPieceDelay++
+						if (spawnNewPieceDelay > 10) {
+							spawnNewPieceDelay = 0
+							spawnNewPiece()
+						}
+					}
+				}
+			}
+		}
+		
+		// Update flying text
+		for (let i=0; i<texts.length; i++) {
+			
+			texts[i].timer += 1
+			
+			if (texts[i].timer == 1) {
+				if (texts[i].scoreTier > 0) {
+					if (texts[i].scoreTier == 1) {
+						sfxScore.play()
+					}
+					if (texts[i].scoreTier == 2) {
+						sfxScore.play()
+						wanjiImage = 40
+						wanjiText = msgGood[Math.floor(Math.random() * msgGood.length)]
+						wanjiDuration = 100
+					}
+					else if (texts[i].scoreTier == 3) {
+						sfxScore.play()
+						wanjiImage = 41
+						wanjiText = msgGreat[Math.floor(Math.random() * msgGreat.length)]
+						wanjiDuration = 100
+					}
+					else if (texts[i].scoreTier == 4) {
+						sfxYakuman.play()
+						wanjiImage = 41
+						wanjiText = msgGreat[Math.floor(Math.random() * msgGreat.length)]
+						wanjiDuration = 100
+					}
+				}
+				else {
+					sfxYaku.play()
+				}
+			}
+			
+			if (texts[i].timer > 0) {
+				texts[i].y -= 0.5
+			}
+			if (texts[i].timer > 60) {
+				texts.splice(i, 1)
+			}
+		}
+		
+		// Training wheels toggle
+		if (Input.T) {
+		
+			if (trainingWheels) {
+				trainingWheels = false
+			}
+			else {
+				trainingWheels = true
+				wanjiDuration = 100
+				wanjiText = "..."
+				wanjiImage = 42
+			}
+		}
+		
+		// Update wanji pic
+		if (wanjiDuration > 0 ) {
+			wanjiDuration--
+			if (wanjiDuration == 0) {
+				wanjiText = ""
+			}
+		}
+		
+		Input.Z = false
+		Input.T = false
+	}
+	
+	function newGame() {
+		
+		sfxNewGame.play()
+		
+		for (let i=0; i<tileListSize; i++) {
+			tileGrid[i].tileID = -1
+			tileGrid[i].yOffset = 0
+		}
+		
+		frameCounter = 0
+		secondCounter = 0
+		score = 0
+		nextTile = -1
+		seatWind = 28 + Math.floor(Math.random() * 3)
+		tilesSpawned = 0
+		spawnNewPiece()
+	}
+	
+	function isSlotFree(slot, dir) {
+		var output = true
+		switch (dir) {
+		  case 0: // up
+			if (slot + boardWidth >= tileListSize) {
+				output = false
+			}
+			else if (tileGrid[slot + boardWidth].tileID != -1) {
+				output = false
+			}
+			break;
+		  case 1: // right
+			if (slot % boardWidth >= boardWidth-1) {
+				output = false
+			}
+			else if (tileGrid[slot + 1].tileID != -1) {
+				output = false
+			}
+			break;
+		  case 2: // down
+			if (slot - boardWidth < 0) {
+				output = false
+			}
+			else if (tileGrid[slot - boardWidth].tileID != -1) {
+				output = false
+			}
+			break;
+		  case 3: // left
+			if (slot % boardWidth == 0) {
+				output = false
+			}
+			else if (tileGrid[slot - 1].tileID != -1) {
+				output = false
+			}
+			break;
+		}
+		return output
+	}
+	
+	function movePieceDown(slot) {
+		tileGrid[slot - boardWidth].tileID = tileGrid[slot].tileID
+		tileGrid[slot - boardWidth].yOffset = tileGrid[slot].yOffset + 1
+		tileGrid[slot].tileID = -1
+		tileGrid[slot].yOffset = 0
+	}
+	
+	function spawnNewPiece() {
+		
+		if (tileGrid[130].tileID != -1) {
+			wanjiDuration = 100
+			wanjiText = "Kuyashii..."
+			wanjiImage = 43
+			sfxGameOver.play()
+			gameOver = true
+			if (score > scoreHigh) {
+				scoreHigh = score
+			}
+			frameCounter = 30
+			secondCounter = 0
+		}
+		else {
+		
+			if (nextTile == -1) {
+				nextTile = Math.floor(Math.random() * 34)
+			}
+		
+			activeSlot = 130
+			tileGrid[activeSlot].tileID = nextTile
+			tileGrid[activeSlot].yOffset = 1
+			
+			
+			if (tilesSpawned == tilesToBomb) {
+				nextTile = 35
+				tilesSpawned = 0
+			}
+			else {
+				nextTile = Math.floor(Math.random() * 34)
+			}
+			tilesSpawned++
+
+		}
+	}
+	
+	function checkMatch(slots) {
+		
+		var tileIDs = [tileGrid[slots[0]].tileID, tileGrid[slots[1]].tileID, tileGrid[slots[2]].tileID, tileGrid[slots[3]].tileID, tileGrid[slots[4]].tileID]
+				
+		// Exit if any of the 5 tiles are empty or have already been matched
+		for (let i=0; i<5; i++) {
+			if (tileIDs[i] == -1 || tileGrid[slots[i]].matchedDelay > 0) {
+				return
+			}
+		}
+		
+		// Check every possible pair combination, if a pair is found check if the remaining 3 form a set
+		if (tileIDs[0] == tileIDs[1]) {
+			var args = [tileIDs[0], tileIDs[1], tileIDs[2], tileIDs[3], tileIDs[4]] // Send it with the pair in front
+			if (checkSet(slots, args)) {
+				return
+			}
+		}
+		if (tileIDs[0] == tileIDs[2]) {
+			var args = [tileIDs[0], tileIDs[2], tileIDs[1], tileIDs[3], tileIDs[4]]
+			if (checkSet(slots, args)) {
+				return
+			}
+		}
+		if (tileIDs[0] == tileIDs[3]) {
+			var args = [tileIDs[0], tileIDs[3], tileIDs[1], tileIDs[2], tileIDs[4]]
+			if (checkSet(slots, args)) {
+				return
+			}
+		}
+		if (tileIDs[0] == tileIDs[4]) {
+			var args = [tileIDs[0], tileIDs[4], tileIDs[1], tileIDs[2], tileIDs[3]]
+			if (checkSet(slots, args)) {
+				return
+			}
+		}
+		if (tileIDs[1] == tileIDs[2]) {
+			var args = [tileIDs[1], tileIDs[2], tileIDs[0], tileIDs[3], tileIDs[4]]
+			if (checkSet(slots, args)) {
+				return
+			}
+		}
+		if (tileIDs[1] == tileIDs[3]) {
+			var args = [tileIDs[1], tileIDs[3], tileIDs[0], tileIDs[2], tileIDs[4]]
+			if (checkSet(slots, args)) {
+				return
+			}
+		}
+		if (tileIDs[1] == tileIDs[4]) {
+			var args = [tileIDs[1], tileIDs[4], tileIDs[0], tileIDs[3], tileIDs[2]]
+			if (checkSet(slots, args)) {
+				return
+			}
+		}
+		if (tileIDs[2] == tileIDs[3]) {
+			var args = [tileIDs[2], tileIDs[3], tileIDs[0], tileIDs[1], tileIDs[4]]
+			if (checkSet(slots, args)) {
+				return
+			}
+		}
+		if (tileIDs[2] == tileIDs[4]) {
+			var args = [tileIDs[2], tileIDs[4], tileIDs[0], tileIDs[1], tileIDs[3]]
+			if (checkSet(slots, args)) {
+				return
+			}
+		}
+		if (tileIDs[3] == tileIDs[4]) {
+			var args = [tileIDs[3], tileIDs[4], tileIDs[0], tileIDs[1], tileIDs[2]]
+			if (checkSet(slots, args)) {
+				return
+			}
+		}
+		
+	}
+	
+	
+	function checkSet(slots, tileIDs) {
+		
+		// Exit if it's 5 of the same tile
+		if (tileIDs[1] == tileIDs[2] && tileIDs[2] == tileIDs[3]) {
+			return false
+		}
+		
+		set = [tileIDs[2], tileIDs[3], tileIDs[4]]
+	
+		if (set[0] == set[1] && set[1] == set[2]) { // Found triplet
+			scoreHand(slots, tileIDs)
+			return true
+		}
+		
+		// Only bother looking for a sequence if all 3 tiles are in the same suit
+		if (checkSuit(set[0]) == checkSuit(set[1]) && checkSuit(set[1]) == checkSuit(set[2])) {
+			// Can't form sequences with honors
+			if (checkSuit(set[0]) != 3) {
+			
+				// if in the same suit, sort the 3 tiles
+				set.sort(function(a, b){return a - b})
+				
+		
+				if (set[1] == set[0] + 1 && set[2] == set[1] + 1) {
+					
+					scoreHand(slots, [tileIDs[0], tileIDs[1], set[0], set[1], set[2]])
+					return true
+				}
+			}
+		}
+		
+		return false
+	}
+	
+	function scoreHand(slots, t) {
+		// We start at one free han for tsumo
+		var yakuList = ["Tsumo"] // List of yaku name strings as they're counted
+		var han = 1 // Han total
+		
+		var block1 = getNumber(t[0]) // Helper values to unclog up some of the checks
+		var block2 = getNumber(t[2])
+		var block2End = getNumber(t[4])
+		var yakuValid = true // Flag reused by some of the checks as it iterates through
+		var foundHonroutou = false
+		
+		
+		
+		//Ryuuiisou
+		for (let i=0; i<5; i++) {
+			if (t[i] != 19 && t[i] != 20 && t[i] != 21 && t[i] != 23 && t[i] != 25 && t[i] != 33) {
+				yakuValid = false
+			}
+		}
+		if (yakuValid) {
+			han = 13
+			yakuList = ["Ryuuiisou"]
+			displayHandScore(slots, han, yakuList)
+			return
+		}
+		
+		// Tanyao
+		yakuValid = true
+		for (let i=0; i<5; i++) {
+			var tileNumber = getNumber(t[i])
+			if (tileNumber < 2 || tileNumber > 8) {
+				yakuValid = false
+			}
+		}
+		if (yakuValid) {
+			han++
+			yakuList.push("Tanyao")
+		}
+		
+		// Chun
+		if (t[2] == 31 && t[3] == 31 && t[4] == 31) {
+			han++
+			yakuList.push("Chun")
+		}
+		
+		// Haku
+		if (t[2] == 32 && t[3] == 32 && t[4] == 32) {
+			han++
+			yakuList.push("Haku")
+		}
+		
+		// Hatsu
+		if (t[2] == 33 && t[3] == 33 && t[4] == 33) {
+			han++
+			yakuList.push("Hatsu")
+		}
+		
+		// Bakaze
+		if (t[2] == 27) {
+			han++
+			yakuList.push("Bakaze East")
+		}
+		
+		// Jikaze
+		if (t[2] == seatWind) {
+			han++
+			switch (seatWind) {
+			  case 28:
+				yakuList.push("Jikaze South")
+				break
+			  case 29:
+				yakuList.push("Jikaze West")
+				break
+			  default:
+				yakuList.push("Jikaze North")
+				break
+			}
+		}
+		
+		
+		// Toitoi
+		if (t[2] == t[3] && t[3] == t[4]) {
+			han += 2
+			yakuList.push("Toitoi")
+			
+			// Tsuuiisou
+			if (t[0] > 26 && t[2] > 26) {
+				han = 13
+				yakuList = ["Tsuuiisou"]
+				displayHandScore(slots, han, yakuList)
+				return
+			}
+			
+			// Chinroutou
+			if ((block1 == 1 || block1 == 9) && (block2 == 1 || block2 == 9)) {
+				han = 13
+				yakuList = ["Chinroutou"]
+				displayHandScore(slots, han, yakuList)
+				return
+			}
+			// Honroutou
+			else if ((block1 < 2 || block1 > 8) && (block2 < 2 || block2 > 8)) {
+				han += 2
+				yakuList.push("Honroutou")
+				foundHonroutou = true
+			}
+		}
+		
+		// Pinfu
+		yakuValid = true
+		if (t[0] == 31 || t[0] == 32 || t[0] == 33 || t[0] == roundWind || t[0] == seatWind) { // Check for value pair
+			yakuValid = false
+		}
+		if (t[2] == t[3]) { // Check for triplet
+			yakuValid = false
+		}
+		if (yakuValid) {
+			if ((t[2] == pinfuTile && getNumber(t[4]) != 9) || (t[4] == pinfuTile && getNumber(t[2]) != 1)) {
+				han += 1
+				yakuList.push("Pinfu")
+			}
+		}
+		
+		// Chinitsu		
+		if (checkSuit(t[0]) == checkSuit(t[2])) {
+			han += 6
+			yakuList.push("Chinitsu")
+		}
+		// Honitsu
+		else if (checkSuit(t[0]) == 3 || checkSuit(t[2]) == 3) {
+			han += 3
+			yakuList.push("Honitsu")
+		}
+		
+		// Junchan
+		if ((block1 == 1 || block1 == 9) && (block2 == 1 || block2 == 9 || block2End == 1 || block2End == 9)) {
+			han += 3
+			yakuList.push("Junchan")
+		}
+		// Chanta
+		else if ((block1 < 2 || block1 == 9) && (block2 < 2 || block2 == 9 || block2End < 2 || block2End == 9)) {
+			if (foundHonroutou == false) {
+				han += 2
+				yakuList.push("Chanta")
+			}
+		}
+		
+		displayHandScore(slots, han, yakuList)
+		
+	}
+	
+	function displayHandScore(slots, han, yakuList) {
+		var tempScore
+		var str = ""
+		
+		if (han >= 13) {
+			tempScore = 32000
+			str = "Yakuman!"
+		}
+		else if (han > 10) {
+			tempScore = 24000
+			str = "Sanbaiman!"
+		}
+		else if (han > 7) {
+			tempScore = 16000
+			str = "Baiman!"
+		}
+		else if (han > 5 ) {
+			tempScore = 12000
+			str = "Haneman!"
+		}
+		else if (han > 3) {
+			tempScore = 8000
+			str = "Mangan!"
+		}
+		else if (han == 3) {
+			tempScore = 4000
+		}
+		else if (han == 2) {
+			tempScore = 2000
+		}
+		else {
+			tempScore = 1000
+		}
+		
+		var textDelay = 0
+		var textX = boardX + 10 + (slots[2]%boardWidth) * 16
+		var textY = boardY + 10 - Math.floor(slots[2]/boardWidth)*16
+		for (let i=0; i<yakuList.length; i++) {
+			texts.push(new Text(textX, textY, yakuList[i], textDelay, 0))
+			textDelay -= 20
+		}
+		if (str != "") {
+			texts.push(new Text(textX, textY, str, textDelay, 0))
+			textDelay -= 20
+		}
+		
+		if (han < 4 ) {
+			texts.push(new Text(textX, textY, tempScore, textDelay, 1))
+		}
+		else if (han < 11) {
+			texts.push(new Text(textX, textY, tempScore, textDelay, 2))
+		}
+		else if (han < 13) {
+			texts.push(new Text(textX, textY, tempScore, textDelay, 3))
+		}
+		else {
+			texts.push(new Text(textX, textY, tempScore, textDelay, 4))
+		}
+		
+		score += tempScore
+		
+		
+		textDelay = textDelay * -1
+		textDelay += 20
+		for (let i=0; i<5; i++) {
+			tileGrid[slots[i]].matchedDelay = textDelay
+		}
+		
+	}
+	
+	function checkSuit(id) {
+		if (id < 9) {
+			return 0 // manzu
+		}
+		else if (id < 18) {
+			return 1 // pinzu
+		}
+		else if (id < 27) {
+			return 2 // souzu
+		}
+		else {
+			return 3 // jihai
+		}
+	}
+	
+	
+	function getNumber(id) {
+		if (id < 9) {
+			return id + 1
+		}
+		else if (id < 18) {
+			return id - 8
+		}
+		else if (id < 27) {
+			return id -17
+		}
+		else {
+			return 0
+		}
+	}
+	
+
+	function draw() {
+		// Clear the background
+		ctx.fillStyle = "#5b8e49";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+	
+		// Draw bamboo frame
+		ctx.drawImage(tileImages[37], 0, 0)
+
+	
+		// Draw the tiles
+		ctx.fillStyle = "#2c492b";
+		ctx.fillRect(boardX, boardX, 144, 240);
+		
+		for (let i=0; i<tileListSize; i++) {
+			if (tileGrid[i].tileID != -1) {
+				
+				var tileImage = tileImages[tileGrid[i].tileID]
+				if (i == flashPosition && tileGrid[i].tileID != 35) {
+					tileImage = tileImages[34]
+				}
+				else if (tileGrid[i].matchedDelay > 0 && tileGrid[i].matchedDelay % 2 == 0) {
+					if (tileGrid[i].tileID == 35) {
+						tileImage = tileImages[36]
+					}
+					else {
+						tileImage = tileImages[34]
+					}
+					
+				}
+				ctx.drawImage(tileImage, boardX + i%boardWidth*16, boardY - Math.floor(i/boardWidth)*16 - Math.round(tileGrid[i].yOffset * 16))
+			}
+		}
+		
+		
+		
+		// Draw wanji display
+		var wanjiX = 205
+		var wanjiY = 30
+		if (wanjiDuration > 0) {
+			ctx.drawImage(tileImages[wanjiImage], wanjiX, wanjiY)
+			if (wanjiText != "") {
+				// draw bubble
+				ctx.drawImage(tileImages[38], wanjiX-10, wanjiY-10)
+				ctx.fillStyle = "black"
+				ctx.fillText(wanjiText,  wanjiX+42, wanjiY+2)
+			}
+		}
+		else {
+			ctx.drawImage(tileImages[39], wanjiX, wanjiY)
+		}
+		
+		if (gameOver) {
+			ctx.textAlign = "center"
+			var gameOverTextX = 103
+			var gameOverTextY = 120
+			if (secondCounter % 2 == 0) {
+				ctx.fillStyle = "black"
+				ctx.fillText("Press Z to Start", gameOverTextX+1, gameOverTextY+1);
+				ctx.fillStyle = "white"
+				ctx.fillText("Press Z to Start", gameOverTextX, gameOverTextY); 
+			}
+			else {
+				ctx.fillStyle = "black"
+				ctx.fillText("Game Over", gameOverTextX+1, gameOverTextY+1);
+				ctx.fillStyle = "white"
+				ctx.fillText("Game Over", gameOverTextX, gameOverTextY); 
+			}
+		}
+		
+		// Draw next tile
+		ctx.textAlign = "left";
+		var textX = 230
+		var textY = 125
+		ctx.fillStyle = "black"
+		ctx.fillText("Next", textX+1, textY+1)
+		ctx.fillStyle = "white"
+		ctx.fillText("Next", textX, textY) 
+		ctx.drawImage(tileImages[nextTile], 208, 110)
+
+		textX = 208
+		textY = 125
+		
+		textY += 20
+		
+		ctx.fillStyle = "black"
+		ctx.fillText("Seat: E", textX+1, textY+1)
+		ctx.fillStyle = "white"
+		ctx.fillText("Seat: E", textX, textY) 
+		
+		textY += 12
+		
+		var roundText = "Round: S"
+		
+		if (seatWind == 29) {
+			roundText = "Round: W"
+		}
+		else if (seatWind == 30) {
+			roundText = "Round: N"
+		}
+		
+		ctx.fillStyle = "black"
+		ctx.fillText(roundText, textX+1, textY+1)
+		ctx.fillStyle = "white"
+		ctx.fillText(roundText, textX, textY)
+		
+		// Draw score
+		textY += 20
+		ctx.textAlign = "left";
+		ctx.fillStyle = "black"
+		ctx.fillText(score, textX+1, textY+1);
+		ctx.fillStyle = "white"
+		ctx.fillText(score, textX, textY); 
+		
+		// Draw hi score
+		textY += 12
+		ctx.textAlign = "left";
+		ctx.fillStyle = "black"
+		ctx.fillText("Hi: "+scoreHigh, textX+1, textY+1)
+		ctx.fillStyle = "white"
+		ctx.fillText("Hi: "+scoreHigh, textX, textY)
+		
+		
+		if (trainingWheels) {
+			ctx.textAlign = "left";
+			ctx.font = '7px retro_computer'
+			ctx.fillStyle = "red"
+			
+			for (let i=0; i<tileListSize; i++) {
+				if (tileGrid[i].tileID != -1) {
+					
+					if (tileGrid[i].tileID < 9) {
+						ctx.fillText(tileGrid[i].tileID + 1, boardX + i%boardWidth*16 + 0.5, Math.round(boardY - Math.floor(i/boardWidth)*16 - tileGrid[i].yOffset * 16 + 9))
+					}
+					else if (tileGrid[i].tileID == 27) {
+						ctx.fillText("E", boardX + i%boardWidth*16 + 0.5, Math.round(boardY - Math.floor(i/boardWidth)*16 - Math.round(tileGrid[i].yOffset * 16) + 9))
+					}
+					else if (tileGrid[i].tileID == 28) {
+						ctx.fillText("S", boardX + i%boardWidth*16 + 0.5, Math.round(boardY - Math.floor(i/boardWidth)*16 - Math.round(tileGrid[i].yOffset * 16) + 9))
+					}
+					else if (tileGrid[i].tileID == 29) {
+						ctx.fillText("W", boardX + i%boardWidth*16 + 0.5, Math.round(boardY - Math.floor(i/boardWidth)*16 - Math.round(tileGrid[i].yOffset * 16) + 9))
+					}
+					else if (tileGrid[i].tileID == 30) {
+						ctx.fillText("N", boardX + i%boardWidth*16 + 0.5, Math.round(boardY - Math.floor(i/boardWidth)*16 - Math.round(tileGrid[i].yOffset * 16) + 9))
+					}
+				}
+			}
+			
+			
+			// Draw next tile's training wheel
+			if (nextTile < 9) {
+				ctx.fillText(nextTile + 1, 208.5, 119)
+			}
+			else if (nextTile == 27) {
+				ctx.fillText("E", 208.5, 119)
+			}
+			else if (nextTile == 28) {
+				ctx.fillText("S", 208.5, 119)
+			}
+			else if (nextTile == 29) {
+				ctx.fillText("W", 208.5, 119)
+			}
+			else if (nextTile == 30) {
+				ctx.fillText("N", 208.5, 119)
+			}
+			
+			ctx.font = '8px PressStart2P';
+		}
+		
+		
+		// Draw version number
+		ctx.fillStyle = "black"
+		ctx.fillText("V1.03", 4, 299);
+		ctx.fillStyle = "white"
+		ctx.fillText("V1.03", 3, 298); 
+
+		
+		
+		// Draw flying text
+		ctx.textAlign = "center";
+		for (let i=0; i<texts.length; i++) {
+			if (texts[i].timer > 0) {
+				ctx.fillStyle = "black"
+				ctx.fillText(texts[i].text, texts[i].x+1, texts[i].y+1)
+				ctx.fillStyle = "white"
+				ctx.fillText(texts[i].text, texts[i].x, texts[i].y); 
+			}
+		}	
+		
+		flashPosition = -1
+		
+	}
+	
+	
+	// Timestep
+	function step(timeStamp){
+	
+		while (timeStamp - timeLast > 16.6) {
+			timeLast += 16.6
+			update()
+		}
+        
+		draw()
+
+        window.requestAnimationFrame(step)
+    }
+	
+	// Run first frame
+	window.requestAnimationFrame(step);
+	
+	function sound(src) {
+		this.sound = document.createElement("audio");
+		this.sound.src = src;
+		this.sound.setAttribute("preload", "auto");
+		this.sound.setAttribute("controls", "none");
+		this.sound.style.display = "none";
+		document.body.appendChild(this.sound);
+		this.play = function(){
+			this.sound.play();
+		}
+		this.stop = function(){
+			this.sound.pause();
+		}
+	}
+	
+	
+</script>
+
+
+</body>
+</html>
